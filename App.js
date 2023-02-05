@@ -4,37 +4,25 @@ import { Traitlines } from './resources/guardian/traitlines';
 import { MajorTraitRadio } from './components/RadioButton';
 import CachedImage from 'react-native-expo-cached-image';
 import { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native-web';
 
 export default function App() {
   return (
     <View style={styles.traitLinesContainer}>
-      <Traitline id= {42}/>
+      <Traitline id= {42}/>  
+      <Traitline id= {16}/>
+      <Traitline id= {13}/>
       <StatusBar style="auto" />
     </View>
   );
 }
 
 
-const TraitlineRender = (data) => {
-  const { id, bg, icon, minor, adept, master, grandmaster, elite } = data;
-  return (
-    <View style={styles.traitLineImageWindow}>
-      <CachedImage
-          isbackground
-          source={{uri: bg}}
-          style={styles.traitLineImage}
-        >
-          <MajorTraits majors = {[adept, master, grandmaster]}/>
-      </CachedImage>
-    </View>
-  )
-}
-
-
 const MajorTraits = (majors) => {
   return (
     <View style={{flex: 1, top: 130}}>
-      <MajorTraitRadio style = {{gap: 10}} traits={majors[0]} />
+      {/* <MajorTraitRadio style = {{gap: 10}} traits={majors[0]} /> */}
+      <Text style={styles.text}>{majors}</Text>
     </View>
   );
 }
@@ -42,7 +30,7 @@ const MajorTraits = (majors) => {
 
 
 
-const gw2Api = ({ endpoint, id }) => {
+const useApi = ({ endpoint, id }) => {
   const [isLoading, setLoading] = useState(true)
   const [output, setData] = useState([])
 
@@ -71,13 +59,14 @@ const gw2Api = ({ endpoint, id }) => {
     getFromApi();
   }, [])
 
-  return output
+  return (isLoading? (<ActivityIndicator/>) : (output)) 
 }
 
 const Traitline = ({id}) => {
   const traitLineData = (data) => {
     return{
     id: data['id'],
+    name: data['name'],
     bg: data['background'],
     icon: data['icon'],
     minor: data['minor_traits'],
@@ -88,9 +77,23 @@ const Traitline = ({id}) => {
     }
   }
 
-  const tld = traitLineData(gw2Api('specializations', id))
+  const tld = traitLineData(useApi({endpoint: 'specializations', id}))
 
-  return(<Text style={styles.text}>{JSON.stringify(tld)}</Text>)
+  const TraitlineRender = (data) => {
+    const { id, name, bg, icon, minor, adept, master, grandmaster, elite } = data;
+    return (
+      <View style={styles.traitLineImageWindow}>
+        <CachedImage
+            isbackground
+            source={{uri: bg}}
+            style={styles.traitLineImage}
+          />
+        <MajorTraits majors = {[adept, master, grandmaster]}/>
+      </View>
+    )
+  }
+
+  return(TraitlineRender(tld))
 }
 
 const styles = StyleSheet.create({
