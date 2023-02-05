@@ -4,7 +4,6 @@ import { Traitlines } from './resources/guardian/traitlines';
 import { MajorTraitRadio } from './components/RadioButton';
 import CachedImage from 'react-native-expo-cached-image';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native-web';
 
 export default function App() {
   return (
@@ -22,7 +21,7 @@ const MajorTraits = (majors) => {
   return (
     <View style={{flex: 1, top: 130}}>
       {/* <MajorTraitRadio style = {{gap: 10}} traits={majors[0]} /> */}
-      <Text style={styles.text}>{majors}</Text>
+      <Text style={{color: 'red'}}>{JSON.stringify(majors)}</Text>
     </View>
   );
 }
@@ -59,7 +58,7 @@ const useApi = ({ endpoint, id }) => {
     getFromApi();
   }, [])
 
-  return (isLoading? (<ActivityIndicator/>) : (output)) 
+  return (output) 
 }
 
 const Traitline = ({id}) => {
@@ -84,11 +83,11 @@ const Traitline = ({id}) => {
     return (
       <View style={styles.traitLineImageWindow}>
         <CachedImage
-            isbackground
+            isBackground
             source={{uri: bg}}
-            style={styles.traitLineImage}
-          />
-        <MajorTraits majors = {[adept, master, grandmaster]}/>
+            style={styles.traitLineImage}>
+          <MajorTraits majors = {[adept, master, grandmaster]}/>
+        </CachedImage>
       </View>
     )
   }
@@ -108,6 +107,8 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     color: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   traitLineImageWindow: {
     width: 647, 
