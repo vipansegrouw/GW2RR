@@ -9,8 +9,8 @@ export default function App() {
   return (
     <View style={styles.traitLinesContainer}>
       <Traitline id= {42}/>  
-      <Traitline id= {16}/>
-      <Traitline id= {13}/>
+      {/* <Traitline id= {16}/>
+      <Traitline id= {13}/> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -19,7 +19,7 @@ export default function App() {
 
 const MajorTraits = (majors) => {
   return (
-    <View style={{flex: 1, top: 130}}>
+    <View>
       {/* <MajorTraitRadio style = {{gap: 10}} traits={majors[0]} /> */}
       <Text style={{color: 'red'}}>{JSON.stringify(majors)}</Text>
     </View>
@@ -86,6 +86,10 @@ const Traitline = ({id}) => {
             isBackground
             source={{uri: bg}}
             style={styles.traitLineImage}>
+          <CachedImage
+            source={{uri: icon}}
+            style={styles.traitLineIcon}
+            />
           <MajorTraits majors = {[adept, master, grandmaster]}/>
         </CachedImage>
       </View>
@@ -98,13 +102,11 @@ const Traitline = ({id}) => {
 const styles = StyleSheet.create({
   traitLinesContainer: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },  
   text: {
-    flex: 1,
     fontSize: 15,
     color: 'red',
     alignItems: 'center',
@@ -114,23 +116,26 @@ const styles = StyleSheet.create({
     width: 647, 
     height: 136, 
     overflow: 'hidden',
-    maxWidth: '100%',
-    marginTop: 1
+    // maxWidth: '100%',
+    aspectRatio: 647/136,
+    marginTop: 1,
   },
   traitLineImage: {
-    width: 1024,
-    height: 256,
     left: 0,
     top: -120,
+    width: '100%',
+    height: '100%'
   },
   traitLineContent: {
-    flex: 1,
-    color: 'red',
-    top: 175,
-    left: 200,
+    // color: 'red',
+    // top: 175,
+    // left: 200,
+  },
+  traitLineIcon: {
+    maxHeight: 64,
+    aspectRatio: 1
   },
   majorTraitContainer: {
-    flex: 1,
     color:'#000',
   },
 });
