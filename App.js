@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View} from 'react-native';
-import { Traitlines } from './resources/guardian/traitlines';
+import { StyleSheet, Text, View} from 'react-native'
 import { MajorTraitRadio } from './components/RadioButton';
 import CachedImage from 'react-native-expo-cached-image';
 import { useEffect, useState } from 'react';
@@ -9,8 +8,8 @@ export default function App() {
   return (
     <View style={styles.traitLinesContainer}>
       <Traitline id= {42}/>  
-      {/* <Traitline id= {16}/>
-      <Traitline id= {13}/> */}
+      <Traitline id= {16}/>
+      <Traitline id= {13}/>
       <StatusBar style="auto" />
     </View>
   );
@@ -21,7 +20,6 @@ const MajorTraits = (majors) => {
   return (
     <View>
       {/* <MajorTraitRadio style = {{gap: 10}} traits={majors[0]} /> */}
-      <Text style={{color: 'red'}}>{JSON.stringify(majors)}</Text>
     </View>
   );
 }
@@ -86,10 +84,6 @@ const Traitline = ({id}) => {
             isBackground
             source={{uri: bg}}
             style={styles.traitLineImage}>
-          <CachedImage
-            source={{uri: icon}}
-            style={styles.traitLineIcon}
-            />
           <MajorTraits majors = {[adept, master, grandmaster]}/>
         </CachedImage>
       </View>
@@ -100,43 +94,77 @@ const Traitline = ({id}) => {
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
   traitLinesContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
-  },  
-  text: {
-    fontSize: 15,
-    color: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignContent: 'center',
+    maxWidth: '100%',
   },
   traitLineImageWindow: {
-    width: 647, 
-    height: 136, 
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     overflow: 'hidden',
-    // maxWidth: '100%',
-    aspectRatio: 647/136,
+    width: 647,
+    height: 120,
     marginTop: 1,
+    color: 'white',
   },
   traitLineImage: {
-    left: 0,
-    top: -120,
-    width: '100%',
-    height: '100%'
+    width: 1024,
+    height: 256,
+    left: 81.5,
+    top: -136,
   },
   traitLineContent: {
     // color: 'red',
     // top: 175,
     // left: 200,
   },
-  traitLineIcon: {
-    maxHeight: 64,
-    aspectRatio: 1
-  },
   majorTraitContainer: {
     color:'#000',
   },
+
+  // TODO: make everything work flexy-style
+  // traitLineImageWindow: {
+  //   flex: 1,
+  //   // alignItems: 'flex-start',
+  //   justifyContent: 'center',
+  //   // overflow: 'hidden',
+  //   // width: '100%',
+  //   maxWidth: '100%',
+  //   maxHeight: '33.333333%',
+  //   marginTop: 1,
+  //   color: 'white',
+  //   aspectRatio: 5.3916666,
+  // },
+  // traitLineImage: {
+  //   flex: 1,
+  //   width: '126%',
+  //   maxWidth: '126%',
+  //   maxHeight: '50%',
+  //   aspectRatio: 4,
+  //   // top: '10%',
+  // },
+  // traitLineContent: {
+  //   // color: 'red',
+  //   // top: 175,
+  //   // left: 200,
+  // },
+  // traitLineIcon: {
+  //   aspectRatio: 1,
+  //   maxHeight: '100%',
+  //   maxWidth: '100%',
+  // },
+  // majorTraitContainer: {
+  //   color:'#000',
+  // },
 });
 
