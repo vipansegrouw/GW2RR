@@ -8,18 +8,18 @@ export default function App() {
   return (
     <View style={styles.traitLinesContainer}>
       <Traitline id= {42}/>  
-      <Traitline id= {16}/>
-      <Traitline id= {13}/>
+      {/* <Traitline id= {16}/>
+      <Traitline id= {13}/> */}
       <StatusBar style="auto" />
     </View>
   );
 }
 
 
-const MajorTraits = (majors) => {
+const MajorTraits = ({majors}) => {
   return (
     <View>
-      {/* <MajorTraitRadio style = {{gap: 10}} traits={majors[0]} /> */}
+      <MajorTraitRadio traits={majors[0]}/>
     </View>
   );
 }
@@ -27,7 +27,7 @@ const MajorTraits = (majors) => {
 
 
 
-const useApi = ({ endpoint, id }) => {
+export const useApi = ({ endpoint, id }) => {
   const [isLoading, setLoading] = useState(true)
   const [output, setData] = useState([])
 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   traitLineImageWindow: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     width: 647,
     height: 120,
     marginTop: 1,
