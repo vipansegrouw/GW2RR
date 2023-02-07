@@ -2,26 +2,32 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View} from 'react-native'
 import { MajorTraitRadio } from './components/RadioButton';
 import CachedImage from 'react-native-expo-cached-image';
-import { useApi } from './components/useApi';
+import { useApi } from './hooks/useApi';
 
 export default function App() {
+  const ids = [42, 16, 13,]
   return (
-    <View style={styles.traitLinesContainer}>
-      <Traitline id= {42}/>  
-      <Traitline id= {16}/>
-      <Traitline id= {13}/>
+    <View style={styles.traitLinesContainer}>      
+    {ids?.map((item, i) => {
+      return (
+        <Traitline key={i} id={item}/>
+      )
+    })}
       <StatusBar style="auto" />
     </View>
   );
 }
 
 
-const MajorTraits = ({majors}) => {
+const MajorTraits = ({ majors }) => {
   return (
-    <View>
-      <MajorTraitRadio key={0} traits={majors[0]} styleProps={{left: 250}}/>
-      <MajorTraitRadio key={1} traits={majors[1]} styleProps={{left: 300}}/>
-      <MajorTraitRadio key={2} traits={majors[2]} styleProps={{left: 350}}/>
+    <View style={{flexDirection: 'row'}}>
+      {majors?.map((item, i) => {
+          return (
+            <MajorTraitRadio key={i} traits={item}/>
+          )
+        })
+      }
     </View>
     );
 }
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
   },
   traitLinesContainer: {
     flex: 1,
-    backgroundColor: 'grey',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
