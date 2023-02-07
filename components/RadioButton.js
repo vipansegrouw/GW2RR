@@ -1,17 +1,28 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { useApi } from './useApi';
 import CachedImage from 'react-native-expo-cached-image';
+import { View, Pressable } from 'react-native';
+import { useApi } from '../hooks/useApi';
 
-export const MajorTraitRadio = ({ styleProps, traits, onSelect }) => {
+export const MajorTraitRadio = ({ traits, onSelect }) => {
   return (
-    traits?.map((item) => {
-      return (<MajorTraitIcon styleProps= {styleProps} id = {item}/>)
-    })
+    <View style={{left: 208, marginLeft: 48}}>
+      {traits?.map((item, i) => {
+        return (
+          <Pressable onPress={() => alert("Your choice: " + item.value)}>
+            <MajorTraitIcon key={i} id = {item}/>
+          </Pressable>
+        )
+      })}
+    </View>
   );
 }
 
-const MajorTraitIcon = ({ styleProps, id }) => {
+const MajorTraitIcon = ({id, isSelected=false}) => {
   const json = useApi({endpoint: 'traits', id})
-  return (<CachedImage source = {{uri: json['icon']}} style={{styleProps, top: 142, width: 36, height: 36}}/>)
+  return (
+  <CachedImage isBackground source = {{uri: json['icon']}} style={{top: 142, width: 36, height: 36}}>
+    <View style = {{width: `${15/16*100}%`, height: `${15/16*100}%`, top: `${1/32*100}%`, left: `${1/32*100}%`,  backgroundColor: `rgba(0,0,0, ${isSelected ? (0.0) : (0.5)})`}}/>
+  </CachedImage>
+  )
+
 }
