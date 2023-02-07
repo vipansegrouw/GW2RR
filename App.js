@@ -1,15 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View} from 'react-native'
+import { StyleSheet, View} from 'react-native'
 import { MajorTraitRadio } from './components/RadioButton';
 import CachedImage from 'react-native-expo-cached-image';
-import { useEffect, useState } from 'react';
+import { useApi } from './components/useApi';
 
 export default function App() {
   return (
     <View style={styles.traitLinesContainer}>
       <Traitline id= {42}/>  
-      {/* <Traitline id= {16}/>
-      <Traitline id= {13}/> */}
+      <Traitline id= {16}/>
+      <Traitline id= {13}/>
       <StatusBar style="auto" />
     </View>
   );
@@ -19,45 +19,13 @@ export default function App() {
 const MajorTraits = ({majors}) => {
   return (
     <View>
-      <MajorTraitRadio traits={majors[0]}/>
+      <MajorTraitRadio key={0} traits={majors[0]} styleProps={{left: 250}}/>
+      <MajorTraitRadio key={1} traits={majors[1]} styleProps={{left: 300}}/>
+      <MajorTraitRadio key={2} traits={majors[2]} styleProps={{left: 350}}/>
     </View>
-  );
+    );
 }
 
-
-
-
-export const useApi = ({ endpoint, id }) => {
-  const [isLoading, setLoading] = useState(true)
-  const [output, setData] = useState([])
-
-  const getApiResponseJson = async (request) => {
-    return fetch(request).then(response=>{
-        return response.json();
-      }
-    )
-  }
-
-  const getFromApi = async () =>{
-    try {
-    const url = `https://api.guildwars2.com/v2/${endpoint}/${id}`
-    const json = await getApiResponseJson(url)
-    setData(json)
-    }
-    catch (error){
-      console.error(error)
-    }
-    finally{
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getFromApi();
-  }, [])
-
-  return (output) 
-}
 
 const Traitline = ({id}) => {
   const traitLineData = (data) => {
@@ -111,7 +79,7 @@ const styles = StyleSheet.create({
   traitLineImageWindow: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    // overflow: 'hidden',
+    overflow: 'hidden',
     width: 647,
     height: 120,
     marginTop: 1,

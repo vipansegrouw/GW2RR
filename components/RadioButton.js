@@ -1,19 +1,17 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useApi } from '../App';
+import { useApi } from './useApi';
+import CachedImage from 'react-native-expo-cached-image';
 
-export const MajorTraitRadio = ({ traits, onSelect }) => {
+export const MajorTraitRadio = ({ styleProps, traits, onSelect }) => {
   return (
-    <View style = {{top: 100, left: 100}}>
-      {traits?.map((item) => {
-        <MajorTraitIcon id={item}/>;
-      })}
-    </View>
+    traits?.map((item) => {
+      return (<MajorTraitIcon styleProps= {styleProps} id = {item}/>)
+    })
   );
 }
 
-const MajorTraitIcon = ({id}) => {
+const MajorTraitIcon = ({ styleProps, id }) => {
   const json = useApi({endpoint: 'traits', id})
-  imgUri = json['icon']
-  return (<CachedImage source = {{uri: {imgUri}}} style={{width: 48, height: 48}}/>)
+  return (<CachedImage source = {{uri: json['icon']}} style={{styleProps, top: 142, width: 36, height: 36}}/>)
 }
