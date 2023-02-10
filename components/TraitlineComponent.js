@@ -2,8 +2,7 @@ import React from 'react';
 import CachedImage from 'react-native-expo-cached-image';
 import { View, Pressable } from 'react-native';
 import { useApi } from '../hooks/useApi';
-import { useState } from 'react';
-import { BuildContextProvider, useBuildContext } from '../contexts/BuildContext';
+import { useBuildContext } from '../contexts/BuildContext';
 import { styles } from '../App';
 
 
@@ -18,7 +17,7 @@ const MajorTraitIcon = ({ key, id, isSelected=false }) => {
 
 }
 
-export const Traitline = ({ id, traitlineIndex }) => {
+export const Traitline = ({ id, traitLineIndex }) => {
   const traitLineApiData = (data) => {
     return{
     bg: data['background'],
@@ -49,7 +48,7 @@ export const Traitline = ({ id, traitlineIndex }) => {
                     {traits?.map((traitId, traitIndex) => {     
                       return (
                         <Pressable key={traitIndex} onPressIn={() => updateTraitSelections(traitLineIndex, columnIndex, traitIndex)}>
-                          <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitlineIndex][columnIndex] === traitIndex}/>
+                          <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitLineIndex]?.[columnIndex] === traitIndex}/>
                         </Pressable>
                       )
                     })}
