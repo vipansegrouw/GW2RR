@@ -5,10 +5,10 @@ export const BuildContextState = createContext({});
 export const useBuildContext = () => useContext(BuildContextState);
 
 export const BuildContextProvider = ({ children }) => {
-  const [traitSelections, setTraitSelection] = useState({});
-  const updateTraitSelections = useCallback(( traitlineIndex, columnIndex, traitIndex ) => {
+  const [traitSelections, setTraitSelection] = useState([[],[],[],]);
+  const updateTraitSelections = useCallback(( traitLineIndex, columnIndex, traitIndex ) => {
     const newSelections = [...traitSelections];
-    newSelections[traitlineIndex][columnIndex] = traitIndex
+    newSelections[traitLineIndex][columnIndex] = traitIndex
     setTraitSelection(newSelections);
   }, [setTraitSelection, traitSelections])
   return (
