@@ -93,7 +93,7 @@ export const Traitline = ({ id, traitLineIndex }) => {
   //           {traits?.map((traitId, traitIndex) => {     
   //             return (
   //               <Pressable key={traitIndex} onPressIn={() => updateTraitSelections(traitLineIndex, columnIndex, traitIndex)}>
-  //                 <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitlineIndex][columnIndex] == traitIndex}/>
+  //                 <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitLineIndex][columnIndex] == traitIndex}/>
   //               </Pressable>
   //             )
   //           })}

@@ -8,7 +8,7 @@ export default function App() {
     /* 
       Format:
 
-      TraitlineIndex: 
+      traitLineIndex: 
         {TraitColumn: TraitChoiceIndex}
     */
     [1, 0, 1,],
@@ -72,7 +72,7 @@ export default function App() {
       <View style={styles.traitLinesContainer}>      
       {buildApiContext?.map((traitLineContext, i) => {
         return (
-          <Traitline key={i} id={traitLineContext.specialisation_id} traitlineIndex={i}/>
+          <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i}/>
         )
       })}
         <StatusBar style="auto" />
