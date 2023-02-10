@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View} from 'react-native'
 import { Traitline } from './components/TraitlineComponent';
+import { BuildContextProvider } from './contexts/BuildContext';
 
 export default function App() {
   const buildUIContext = [
@@ -67,14 +68,16 @@ export default function App() {
   ]
 
   return (
-    <View style={styles.traitLinesContainer}>      
-    {buildApiContext?.map((traitLineContext, i) => {
-      return (
-        <Traitline key={i} id={traitLineContext.specialisation_id} traitlineIndex={i}/>
-      )
-    })}
-      <StatusBar style="auto" />
-    </View>
+    <BuildContextProvider>
+      <View style={styles.traitLinesContainer}>      
+      {buildApiContext?.map((traitLineContext, i) => {
+        return (
+          <Traitline key={i} id={traitLineContext.specialisation_id} traitlineIndex={i}/>
+        )
+      })}
+        <StatusBar style="auto" />
+      </View>
+    </BuildContextProvider>
   );
 }
 

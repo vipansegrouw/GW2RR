@@ -3,22 +3,9 @@ import CachedImage from 'react-native-expo-cached-image';
 import { View, Pressable } from 'react-native';
 import { useApi } from '../hooks/useApi';
 import { useState } from 'react';
-import { useBuildContext } from '../contexts/BuildContext';
+import { BuildContextProvider, useBuildContext } from '../contexts/BuildContext';
 import { styles } from '../App';
-export const MajorTraitRadio = ({ traits, onSelect, index }) => {
-  return (
-    <View key={index} style={{left: 208, marginLeft: 48}}>
-      {traits?.map((item, i) => {     
-        const [selected, setSelected] = useState(false);
-        return (
-          <Pressable key={i} onPressIn={() => setSelected(true)}>
-            <MajorTraitIcon id = {item} isSelected={selected}/>
-          </Pressable>
-        )
-      })}
-    </View>
-  );
-}
+
 
 const MajorTraitIcon = ({ key, id, isSelected=false }) => {
   const json = useApi({endpoint: 'traits', id})
@@ -50,29 +37,29 @@ export const Traitline = ({ id, traitlineIndex }) => {
     const { bg, adept, master, grandmaster } = data;
     const majors = [adept, master, grandmaster]
     return (
-      <View style={styles.traitLineImageWindow}>
-        <CachedImage
-            isBackground
-            source={{uri: bg}}
-            style={styles.traitLineImage}>
-          <View style={{flexDirection: 'row'}}>
-            {majors?.map((traits, columnIndex) => {
-              return (
-                <View key={columnIndex} style={{left: 208, marginLeft: 48}}>
-                  {traits?.map((traitId, traitIndex) => {     
-                    return (
-                      <Pressable key={traitIndex} onPressIn={() => updateTraitSelections(traitLineIndex, columnIndex, traitIndex)}>
-                        <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitlineIndex][columnIndex] === traitIndex}/>
-                      </Pressable>
-                    )
-                  })}
-                </View>
-              )
-              })
-            }
-          </View>
-        </CachedImage>
-      </View>
+        <View style={styles.traitLineImageWindow}>
+          <CachedImage
+              isBackground
+              source={{uri: bg}}
+              style={styles.traitLineImage}>
+            <View style={{flexDirection: 'row'}}>
+              {majors?.map((traits, columnIndex) => {
+                return (
+                  <View key={columnIndex} style={{left: 208, marginLeft: 48}}>
+                    {traits?.map((traitId, traitIndex) => {     
+                      return (
+                        <Pressable key={traitIndex} onPressIn={() => updateTraitSelections(traitLineIndex, columnIndex, traitIndex)}>
+                          <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitlineIndex][columnIndex] === traitIndex}/>
+                        </Pressable>
+                      )
+                    })}
+                  </View>
+                )
+                })
+              }
+            </View>
+          </CachedImage>
+        </View>
     )
   }
   
