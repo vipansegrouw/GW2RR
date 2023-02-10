@@ -1,16 +1,76 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View} from 'react-native'
-import { MajorTraitRadio } from './components/RadioButton';
-import CachedImage from 'react-native-expo-cached-image';
-import { useApi } from './hooks/useApi';
+import { Traitline } from './components/TraitlineComponent';
 
 export default function App() {
-  const ids = [42, 16, 13,]
+  const buildUIContext = [
+    /* 
+      Format:
+
+      TraitlineIndex: 
+        {TraitColumn: TraitChoiceIndex}
+    */
+    [1, 0, 1,],
+    [0, 1, 2,],
+    [0, 1, 1,], 
+  ]
+  
+  
+  
+
+  const buildApiContext = [
+      /* 
+    Format:
+    [
+      {
+        "specialisation_id": 1337,
+        "minor": [adeptId, masterId, grandmasterId],
+        "major": {
+          "adept": [topId, midId, botId],
+          "master": [topId, midId, botId],
+          "grandmaster": [topId, midId, botId],
+        }
+      }
+    ]
+  */
+    {
+      "specialisation_id": 42,
+      "name": "",
+      "minor": [],
+      "major": {
+        "adept": [],
+        "master": [],
+        "grandmaster": [],
+      }
+    },
+    {
+      "specialisation_id": 16,
+      "name": "",
+      "minor": [],
+      "major": {
+        "adept": [],
+        "master": [],
+        "grandmaster": [],
+      }
+    },
+    {
+      "specialisation_id": 13,
+      "name": "",
+      "minor": [],
+      "major": {
+        "adept": [],
+        "master": [],
+        "grandmaster": [],
+      }
+    },
+    
+  ]
+
   return (
     <View style={styles.traitLinesContainer}>      
-    {ids?.map((item, i) => {
+    {buildApiContext?.map((traitLineContext, i) => {
       return (
-        <Traitline key={i} id={item}/>
+        <Traitline key={i} id={traitLineContext.specialisation_id} traitlineIndex={i}/>
       )
     })}
       <StatusBar style="auto" />
@@ -18,56 +78,7 @@ export default function App() {
   );
 }
 
-
-const MajorTraits = ({ majors }) => {
-  return (
-    <View style={{flexDirection: 'row'}}>
-      {majors?.map((item, i) => {
-          return (
-            <MajorTraitRadio key={i} traits={item}/>
-          )
-        })
-      }
-    </View>
-    );
-}
-
-
-const Traitline = ({id}) => {
-  const traitLineData = (data) => {
-    return{
-    id: data['id'],
-    name: data['name'],
-    bg: data['background'],
-    icon: data['icon'],
-    minor: data['minor_traits'],
-    adept: data['major_traits']?.slice(0,3),
-    master: data['major_traits']?.slice(3,6),
-    grandmaster: data['major_traits']?.slice(6,9),
-    elite: data['elite'],
-    }
-  }
-
-  const tld = traitLineData(useApi({endpoint: 'specializations', id}))
-
-  const TraitlineRender = (data) => {
-    const { id, name, bg, icon, minor, adept, master, grandmaster, elite } = data;
-    return (
-      <View style={styles.traitLineImageWindow}>
-        <CachedImage
-            isBackground
-            source={{uri: bg}}
-            style={styles.traitLineImage}>
-          <MajorTraits majors = {[adept, master, grandmaster]}/>
-        </CachedImage>
-      </View>
-    )
-  }
-
-  return(TraitlineRender(tld))
-}
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     alignItems: 'center',
