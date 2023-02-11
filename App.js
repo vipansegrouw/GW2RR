@@ -11,13 +11,13 @@ export default function App() {
   return (
     <ApiBuildContextProvider initialIds = {[42, 16, 13,]}>
       <BuildContextProvider>
-        <TestExtractTheStuff/>
+        <Traitlines/>
       </BuildContextProvider>
     </ApiBuildContextProvider>
   );
 }
 
-const TestExtractTheStuff = () => {
+const Traitlines = () => {
   const { traitLinesData, updateTraitLinesData } = useApiBuildContext();
   return (
     <View style={styles.traitLinesContainer}>      

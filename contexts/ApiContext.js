@@ -22,7 +22,7 @@ export const ApiBuildContextProvider = ({ children, initialIds }) => {
     }
     
   } 
-  const traitLinesData = [initialIds?.map((id) => getTraitLineData(id))]
+  const traitLinesData = initialIds?.map((id) => getTraitLineData(id))
   // const [ traitLinesData, setTraitLinesData ] = useState(initialTraitLinesData);
 
   const updateTraitLinesData = useCallback(( traitLineIndex, id ) => {
