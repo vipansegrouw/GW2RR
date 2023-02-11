@@ -23,7 +23,7 @@ const TestExtractTheStuff = () => {
     <View style={styles.traitLinesContainer}>      
     {traitLinesData?.map((traitLineContext, i) => {
       return (
-        <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i}/>
+        <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i} tld={traitLineContext}/>
       )
     })}
       <StatusBar style="auto" />
@@ -68,40 +68,5 @@ export const styles = StyleSheet.create({
   majorTraitContainer: {
     color:'#000',
   },
-
-  // TODO: make everything work flexy-style
-  // traitLineImageWindow: {
-  //   flex: 1,
-  //   // alignItems: 'flex-start',
-  //   justifyContent: 'center',
-  //   // overflow: 'hidden',
-  //   // width: '100%',
-  //   maxWidth: '100%',
-  //   maxHeight: '33.333333%',
-  //   marginTop: 1,
-  //   color: 'white',
-  //   aspectRatio: 5.3916666,
-  // },
-  // traitLineImage: {
-  //   flex: 1,
-  //   width: '126%',
-  //   maxWidth: '126%',
-  //   maxHeight: '50%',
-  //   aspectRatio: 4,
-  //   // top: '10%',
-  // },
-  // traitLineContent: {
-  //   // color: 'red',
-  //   // top: 175,
-  //   // left: 200,
-  // },
-  // traitLineIcon: {
-  //   aspectRatio: 1,
-  //   maxHeight: '100%',
-  //   maxWidth: '100%',
-  // },
-  // majorTraitContainer: {
-  //   color:'#000',
-  // },
 });
 

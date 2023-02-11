@@ -17,19 +17,7 @@ const MajorTraitIcon = ({ key, id, isSelected=false }) => {
 
 }
 
-export const Traitline = ({ id, traitLineIndex }) => {
-  const traitLineApiData = (data) => {
-    return{
-    specialization_id: id,
-    bg: data.bg,
-    adept: data.major?.adept,
-    master: data.major?.master,
-    grandmaster: data.major?.grandmaster,
-    }
-  }
-
-  const tld = traitLineApiData(useApi({endpoint: 'specializations', id}))
-
+export const Traitline = ({ id, traitLineIndex, tld }) => {
   const { traitSelections, updateTraitSelections } = useBuildContext();
   
   
