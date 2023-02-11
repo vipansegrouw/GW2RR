@@ -20,6 +20,7 @@ const MajorTraitIcon = ({ key, id, isSelected=false }) => {
 export const Traitline = ({ id, traitLineIndex }) => {
   const traitLineApiData = (data) => {
     return{
+    specialization_id: id,
     bg: data['background'],
     adept: data['major_traits']?.slice(0,3),
     master: data['major_traits']?.slice(3,6),
@@ -61,47 +62,5 @@ export const Traitline = ({ id, traitLineIndex }) => {
         </View>
     )
   }
-  
-  // const { apiContext, updateApiContext } = useApiBuildContext();
-  // const apiTraits = {
-  //   "specialisation_id": 42,
-  //   "name": "",
-  //   "minor": [],
-  //   "major": {
-  //     "adept": [    
-  //       563,
-  //       634,
-  //       1925,
-  //     ],
-  //     "master": [
-  //       628,
-  //       653,
-  //       1556,
-  //     ],
-  //     "grandmaster": [
-  //       635,
-  //       637,
-  //       2017,
-  //   ],
-  //   }
-  // }
-  // return (
-  //   <View style={{flexDirection: 'row'}}>
-  //     {majors?.map((traits, columnIndex) => {
-  //       return (
-  //         <View key={columnIndex} style={{left: 208, marginLeft: 48}}>
-  //           {traits?.map((traitId, traitIndex) => {     
-  //             return (
-  //               <Pressable key={traitIndex} onPressIn={() => updateTraitSelections(traitLineIndex, columnIndex, traitIndex)}>
-  //                 <MajorTraitIcon id = {traitId} isSelected={traitSelections[traitLineIndex][columnIndex] == traitIndex}/>
-  //               </Pressable>
-  //             )
-  //           })}
-  //         </View>
-  //       )
-  //       })
-  //     }
-  //   </View>
-  //   );
   return(TraitlineRender(tld))
 }

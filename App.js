@@ -1,23 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View} from 'react-native'
 import { Traitline } from './components/TraitlineComponent';
+import { ApiBuildContextProvider, useApiBuildContext } from './contexts/ApiContext';
 import { BuildContextProvider } from './contexts/BuildContext';
 
-export default function App() {
-  const buildUIContext = [
-    /* 
-      Format:
 
-      traitLineIndex: 
-        {TraitColumn: TraitChoiceIndex}
-    */
-    [1, 0, 1,],
-    [0, 1, 2,],
-    [0, 1, 1,], 
-  ]
-  
-  
-  
+export default function App() {
 
   const buildApiContext = [
       /* 
@@ -35,7 +23,7 @@ export default function App() {
     ]
   */
     {
-      "specialisation_id": 42,
+      "specialization_id": 42,
       "name": "",
       "minor": [],
       "major": {
@@ -45,7 +33,7 @@ export default function App() {
       }
     },
     {
-      "specialisation_id": 16,
+      "specialization_id": 16,
       "name": "",
       "minor": [],
       "major": {
@@ -55,7 +43,7 @@ export default function App() {
       }
     },
     {
-      "specialisation_id": 13,
+      "specialization_id": 13,
       "name": "",
       "minor": [],
       "major": {
@@ -66,18 +54,21 @@ export default function App() {
     },
     
   ]
-
+  
+  const { traitlines, updateTraitlines } = useApiBuildContext();
   return (
-    <BuildContextProvider>
-      <View style={styles.traitLinesContainer}>      
-      {buildApiContext?.map((traitLineContext, i) => {
-        return (
-          <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i}/>
-        )
-      })}
-        <StatusBar style="auto" />
-      </View>
-    </BuildContextProvider>
+    <ApiBuildContextProvider initialIds = {[42, 16, 13,]}>
+      <BuildContextProvider>
+        <View style={styles.traitLinesContainer}>      
+        {traitlines?.map((traitLineContext, i) => {
+          return (
+            <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i}/>
+          )
+        })}
+          <StatusBar style="auto" />
+        </View>
+      </BuildContextProvider>
+    </ApiBuildContextProvider>
   );
 }
 
