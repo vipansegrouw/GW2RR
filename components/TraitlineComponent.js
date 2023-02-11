@@ -17,13 +17,13 @@ const MajorTraitIcon = ({ key, id, isSelected=false }) => {
 
 }
 
-export const Traitline = ({ id, traitLineIndex, tld }) => {
+export const Traitline = ({ traitLineIndex, tld }) => {
   const { traitSelections, updateTraitSelections } = useBuildContext();
   
   
   const TraitlineRender = (data) => {
-    const { bg, adept, master, grandmaster } = data;
-    const majors = [adept, master, grandmaster]
+    const { bg, major } = data;
+    const majors = [major?.adept, major?.master, major?.grandmaster]
     return (
         <View style={styles.traitLineImageWindow}>
           <CachedImage

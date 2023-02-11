@@ -22,15 +22,16 @@ export const ApiBuildContextProvider = ({ children, initialIds }) => {
     }
     
   } 
-  const initialTraitLinesData = [initialIds?.map((id) => getTraitLineData(id))]
-  const [ traitLinesData, setTraitLinesData ] = useState(initialTraitLinesData);
+  const traitLinesData = [initialIds?.map((id) => getTraitLineData(id))]
+  // const [ traitLinesData, setTraitLinesData ] = useState(initialTraitLinesData);
+
   const updateTraitLinesData = useCallback(( traitLineIndex, id ) => {
 
     const newTraitLineData = getTraitLineData(id)
     const newApiData = [...traitLinesData]
     newApiData[traitLineIndex] = newTraitLineData
-    setTraitLinesData(newApiData);
-  }, [setTraitLinesData, traitLinesData])
+    // setTraitLinesData(newApiData);
+  }, [])
   return (
     <ApiBuildContextState.Provider
       value={{
