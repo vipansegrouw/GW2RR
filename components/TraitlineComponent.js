@@ -21,10 +21,10 @@ export const Traitline = ({ id, traitLineIndex }) => {
   const traitLineApiData = (data) => {
     return{
     specialization_id: id,
-    bg: data['background'],
-    adept: data['major_traits']?.slice(0,3),
-    master: data['major_traits']?.slice(3,6),
-    grandmaster: data['major_traits']?.slice(6,9),
+    bg: data.bg,
+    adept: data.major?.adept,
+    master: data.major?.master,
+    grandmaster: data.major?.grandmaster,
     }
   }
 

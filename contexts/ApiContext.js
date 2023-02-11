@@ -12,6 +12,7 @@ export const ApiBuildContextProvider = ({ children, initialIds }) => {
     return {
       specialization_id: id,
       name: apiResponse.name,
+      bg: apiResponse.background,
       minor: apiResponse.minor_traits,
       major: {
         adept: apiResponse.major_traits?.slice(0,3),
@@ -21,7 +22,7 @@ export const ApiBuildContextProvider = ({ children, initialIds }) => {
     }
     
   } 
-  const initialTraitLinesData = [initialIds.map((id) => getTraitLineData(id))]
+  const initialTraitLinesData = [initialIds?.map((id) => getTraitLineData(id))]
   const [ traitLinesData, setTraitLinesData ] = useState(initialTraitLinesData);
   const updateTraitLinesData = useCallback(( traitLineIndex, id ) => {
 

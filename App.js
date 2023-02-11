@@ -7,70 +7,28 @@ import { BuildContextProvider } from './contexts/BuildContext';
 
 export default function App() {
 
-  const buildApiContext = [
-      /* 
-    Format:
-    [
-      {
-        "specialisation_id": 1337,
-        "minor": [adeptId, masterId, grandmasterId],
-        "major": {
-          "adept": [topId, midId, botId],
-          "master": [topId, midId, botId],
-          "grandmaster": [topId, midId, botId],
-        }
-      }
-    ]
-  */
-    {
-      "specialization_id": 42,
-      "name": "",
-      "minor": [],
-      "major": {
-        "adept": [],
-        "master": [],
-        "grandmaster": [],
-      }
-    },
-    {
-      "specialization_id": 16,
-      "name": "",
-      "minor": [],
-      "major": {
-        "adept": [],
-        "master": [],
-        "grandmaster": [],
-      }
-    },
-    {
-      "specialization_id": 13,
-      "name": "",
-      "minor": [],
-      "major": {
-        "adept": [],
-        "master": [],
-        "grandmaster": [],
-      }
-    },
-    
-  ]
-  
-  const { traitlines, updateTraitlines } = useApiBuildContext();
+
   return (
     <ApiBuildContextProvider initialIds = {[42, 16, 13,]}>
       <BuildContextProvider>
-        <View style={styles.traitLinesContainer}>      
-        {traitlines?.map((traitLineContext, i) => {
-          return (
-            <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i}/>
-          )
-        })}
-          <StatusBar style="auto" />
-        </View>
+        <TestExtractTheStuff/>
       </BuildContextProvider>
     </ApiBuildContextProvider>
   );
 }
+
+const TestExtractTheStuff = () => {
+  const { traitLinesData, updateTraitLinesData } = useApiBuildContext();
+  return (
+    <View style={styles.traitLinesContainer}>      
+    {traitLinesData?.map((traitLineContext, i) => {
+      return (
+        <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i}/>
+      )
+    })}
+      <StatusBar style="auto" />
+    </View>
+  )}
 
 export const styles = StyleSheet.create({
   mainContainer: {
