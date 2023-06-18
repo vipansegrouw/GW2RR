@@ -1,48 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View} from 'react-native'
+import { StyleSheet, View } from 'react-native';
 import { Traitline } from './components/TraitlineComponent';
-import { ApiBuildContextProvider, useApiBuildContext } from './contexts/ApiContext';
+import {
+  ApiBuildContextProvider,
+  useApiBuildContext,
+} from './contexts/ApiContext';
 import { BuildContextProvider } from './contexts/BuildContext';
 
-
 export default function App() {
-
-
   return (
-    <ApiBuildContextProvider initialIds = {[42, 16, 13,]}>
+    <ApiBuildContextProvider initialIds={[42, 16, 13]}>
       <BuildContextProvider>
-        <Traitlines/>
+        <View style={styles.mainContainer}>
+          <Traitlines />
+        </View>
       </BuildContextProvider>
     </ApiBuildContextProvider>
   );
 }
 
 const Traitlines = () => {
-  const { traitLinesData, updateTraitLinesData } = useApiBuildContext();
+  const { traitLinesData } = useApiBuildContext();
+
   return (
-    <View style={styles.traitLinesContainer}>      
-    {traitLinesData?.map((traitLineContext, i) => {
-      return (
-        <Traitline key={i} id={traitLineContext.specialisation_id} traitLineIndex={i} tld={traitLineContext}/>
-      )
-    })}
-      <StatusBar style="auto" />
+    <View style={styles.traitLinesContainer}>
+      {traitLinesData?.map((traitLineContext, i) => {
+        return (
+          <Traitline
+            key={i}
+            id={traitLineContext.specialisation_id}
+            traitLineIndex={i}
+            tld={traitLineContext}
+          />
+        );
+      })}
     </View>
-  )}
+  );
+};
 
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    alignContent: 'center',
   },
   traitLinesContainer: {
     flex: 1,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    alignContent: 'center',
     maxWidth: '100%',
   },
   traitLineImageWindow: {
@@ -60,13 +66,7 @@ export const styles = StyleSheet.create({
     left: 81.5,
     top: -136,
   },
-  traitLineContent: {
-    // color: 'red',
-    // top: 175,
-    // left: 200,
-  },
   majorTraitContainer: {
-    color:'#000',
+    color: '#000',
   },
 });
-
