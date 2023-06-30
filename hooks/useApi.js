@@ -11,7 +11,7 @@ export const useApi = ({ endpoint, id }) => {
       return json;
     } catch (error) {
       console.error(error);
-      return null;
+      return null; // TODO probably the issue is here but I can't get the error to investigate
     }
   };
 

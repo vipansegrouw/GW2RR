@@ -5,12 +5,14 @@ import {
   useApiBuildContext,
 } from './contexts/ApiContext';
 import { BuildContextProvider } from './contexts/BuildContext';
+import { DropdownBox } from './components/DropdownComponent';
 
 export default function App() {
   return (
     <ApiBuildContextProvider initialIds={[42, 16, 13]}>
       <BuildContextProvider>
         <View style={styles.mainContainer}>
+          <DropdownBox />
           <Traitlines />
         </View>
       </BuildContextProvider>
@@ -46,7 +48,16 @@ export const styles = StyleSheet.create({
   },
   traitLinesContainer: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: '100%',
+  },
+  dropdownContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     maxWidth: '100%',
