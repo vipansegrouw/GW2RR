@@ -1,34 +1,33 @@
 import { useEffect, useState } from 'react';
 
-
 export const useApi = ({ endpoint, id }) => {
   const [isLoading, setLoading] = useState(true);
-  const [output, setData] = useState([]);
+  const [output, setOutput] = useState(null);
 
   const getApiResponseJson = async (request) => {
-    return fetch(request).then(response => {
-      return response.json();
-    }
-    );
-  };
-
-  const getFromApi = async () => {
     try {
-      const url = `https://api.guildwars2.com/v2/${endpoint}/${id}`;
-      const json = await getApiResponseJson(url);
-      setData(json);
-    }
-    catch (error) {
+      const response = await fetch(request);
+      const json = await response.json();
+      return json;
+    } catch (error) {
       console.error(error);
-    }
-    finally {
-      setLoading(false);
+      return null;
     }
   };
 
   useEffect(() => {
-    getFromApi();
-  }, []);
+    const getFromApi = async () => {
+      try {
+        const url = `https://api.guildwars2.com/v2/${endpoint}/${id}`;
+        const json = await getApiResponseJson(url);
+        setOutput(json);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return (output);
+    getFromApi();
+  }, [endpoint, id]);
+
+  return output;
 };

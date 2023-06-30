@@ -5,12 +5,16 @@ export const BuildContextState = createContext({});
 export const useBuildContext = () => useContext(BuildContextState);
 
 export const BuildContextProvider = ({ children }) => {
-  const [traitSelections, setTraitSelection] = useState([[],[],[],]);
-  const updateTraitSelections = useCallback(( traitLineIndex, columnIndex, traitIndex ) => {
-    const newSelections = [...traitSelections];
-    newSelections[traitLineIndex][columnIndex] = traitIndex
-    setTraitSelection(newSelections);
-  }, [setTraitSelection, traitSelections])
+  const [traitSelections, setTraitSelections] = useState([[], [], [], []]);
+
+  const updateTraitSelections = useCallback((traitLineIndex, columnIndex, traitIndex) => {
+    setTraitSelections((prevSelections) => {
+      const newSelections = [...prevSelections];
+      newSelections[traitLineIndex][columnIndex] = traitIndex;
+      return newSelections;
+    });
+  }, []);
+
   return (
     <BuildContextState.Provider
       value={{
@@ -21,4 +25,4 @@ export const BuildContextProvider = ({ children }) => {
       {children}
     </BuildContextState.Provider>
   );
-}
+};
